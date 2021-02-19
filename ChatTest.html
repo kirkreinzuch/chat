@@ -1,58 +1,454 @@
-<html>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"> <!-- utf-8 works for most cases -->
+	<meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+	<meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+	<title>Hello from Snipes USA Support</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+
+	<!-- Web Font / @font-face : BEGIN -->
+	<!-- NOTE: If web fonts are not required, lines 10 - 27 can be safely removed. -->
+
+	<!-- Desktop Outlook chokes on web font references and defaults to Times New Roman, so we force a safe fallback font. -->
 
 
-<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
-<script type='text/javascript'>
-	var initESW = function(gslbBaseURL) {
-		embedded_svc.settings.displayHelpButton = true; //Or false
-		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+    <!--[if mso]>
+        <style>
+            * {
+                font-family: sans-serif !important;
+            }
+        </style>
+    <![endif]-->
 
-		//embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
-		//embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+    <!-- All other clients get the webfont reference; some will render the font and others will silently fail to the fallbacks. More on that here: http://stylecampaign.com/blog/2015/02/webfont-support-in-email/ -->
+    <!--[if !mso]><!-->
+    <!-- insert web font reference, eg: <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'> -->
+    <!--<![endif]-->
 
-		//embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
-		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+    <!-- Web Font / @font-face : END -->
 
-		// Settings for Chat
-		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-			// Returns a valid button ID.
-		//};
-		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
-		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
-		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+    <!-- CSS Reset -->
+    <style>
 
-		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-		embedded_svc.settings.entryFeature = 'LiveAgent';
+    	/* What it does: Remove spaces around the email design added by some email clients. */
+    	/* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+    	html,
+    	body {
+    		margin: 0 auto !important;
+    		padding: 0 !important;
+    		height: 100% !important;
+    		width: 100% !important;
+    	}
 
-		embedded_svc.init(
-			'https://snipesus.my.salesforce.com',
-			'https://snipesusa.secure.force.com',
-			gslbBaseURL,
-			'00D4S000000EeIu',
-			'SnipesUSA_Chat',
-			{
-				baseLiveAgentContentURL: 'https://c.la4-c1-ia2.salesforceliveagent.com/content',
-				deploymentId: '5724S000000g5UZ',
-				buttonId: '5734S000000g5Ux',
-				baseLiveAgentURL: 'https://d.la4-c1-ia2.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I4S000000g34YUAQ_1776535398d',
-				isOfflineSupportEnabled: false
-			}
-		);
-	};
+    	/* What it does: Stops email clients resizing small text. */
+    	* {
+    		-ms-text-size-adjust: 100%;
+    		-webkit-text-size-adjust: 100%;
+    	}
 
-	if (!window.embedded_svc) {
-		var s = document.createElement('script');
-		s.setAttribute('src', 'https://snipesus.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-		s.onload = function() {
-			initESW(null);
-		};
-		document.body.appendChild(s);
-	} else {
-		initESW('https://service.force.com');
-	}
-</script>
-</body>
-</html>
+    	/* What it does: Centers email on Android 4.4 */
+    	div[style*="margin: 16px 0"] {
+    		margin:0 !important;
+    	}
+
+    	/* What it does: Stops Outlook from adding extra spacing to tables. */
+    	table,
+    	td {
+    		mso-table-lspace: 0pt !important;
+    		mso-table-rspace: 0pt !important;
+    	}
+
+
+    	table table table {
+    		table-layout: auto;
+    	}
+
+    	/* What it does: Uses a better rendering method when resizing images in IE. */
+    	img {
+    		-ms-interpolation-mode:bicubic;
+    	}
+
+    	/* What it does: A work-around for iOS meddling in triggered links. */
+    	*[x-apple-data-detectors] {
+    		color: inherit !important;
+    		text-decoration: none !important;
+    	}
+
+    	/* What it does: A work-around for Gmail meddling in triggered links. */
+    	.x-gmail-data-detectors,
+    	.x-gmail-data-detectors *,
+    	.aBn {
+    		border-bottom: 0 !important;
+    		cursor: default !important;
+    	}
+
+    	/* What it does: Prevents Gmail from displaying an download button on large, non-linked images. */
+    	.a6S {
+    		display: none !important;
+    		opacity: 0.01 !important;
+    	}
+    	/* If the above doesn't work, add a .g-img class to any image in question. */
+    	img.g-img + div {
+    		display:none !important;
+    	}
+
+    	/* What it does: Prevents underlining the button text in Windows 10 */
+    	.button-link {
+    		text-decoration: none !important;
+    	}
+
+    	/* What it does: Removes right gutter in Gmail iOS app: https://github.com/TedGoas/Cerberus/issues/89  */
+    	/* Create one of these media queries for each additional viewport size you'd like to fix */
+    	/* Thanks to Eric Lepetit @ericlepetitsf) for help troubleshooting */
+    	@media only screen and (min-device-width: 375px) and (max-device-width: 413px) { /* iPhone 6 and 6+ */
+    		.email-container {
+    			min-width: 375px !important;
+    		}
+    	}
+
+    	@media only screen and (max-device-width: 480px), only screen and (max-width: 480px){
+    		.preheader-content {display: block; text-align: center;}
+    		.preheader-content.top {margin-bottom: 6px;}
+    	}
+
+    </style>
+
+    <!-- What it does: Makes background images in 72ppi Outlook render at correct size. -->
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:AllowPNG/>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+	<![endif]-->
+
+	<!-- Progressive Enhancements -->
+	<style>
+
+		/* What it does: Hover styles for buttons */
+		.button-td,
+		.button-a {
+			transition: all 100ms ease-in;
+		}
+
+
+	</style>
+
+</head>
+<body width="100%" bgcolor="#ffffff" style="margin: 0; mso-line-height-rule: exactly;">
+	<center style="width: 100%; background: #ffffff; text-align: left;">
+
+		<!-- Visually Hidden Preheader Text : BEGIN -->
+		<div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+
+			<!-- BEGIN TXT SNIPPET // -->
+			Snipes USA Support
+			<!-- END TXT SNIPPET // -->
+
+		</div>
+		<!-- Visually Hidden Preheader Text : END -->
+
+		<div style="margin: auto; border-bottom: 1px solid #d8d8d8;" class="email-container">
+
+			<!-- Pre-header Begin -->
+			<table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+
+				<!-- Clear Spacer : BEGIN -->
+				<tr>
+					<td height="5" style="font-size: 0; line-height: 0;">
+						&nbsp;
+					</td>
+				</tr>
+				<!-- Clear Spacer : END -->
+
+			</div>
+
+
+        <!--
+            Set the email width. Defined in two places:
+            1. max-width for all clients except Desktop Windows Outlook, allowing the email to squish on narrow but never go wider than 600px.
+            2. MSO tags for Desktop Windows Outlook enforce a 600px width.
+        -->
+        <div style="max-width: 600px; margin: auto;" class="email-container">
+            <!--[if mso]>
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" width="600" align="center">
+            <tr>
+            <td>
+            <![endif]-->
+
+            <!-- Email Header : BEGIN -->
+            <table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+
+            	<tr>
+            		<!-- Logo Start -->
+            		<td style="padding: 25px 25px 20px 25px; text-align: center">
+            			<a href="https://www.snipesusa.com">
+            				<img src="https://media.sailthru.com/4yy/1k4/1/e/5e1e160e37d85.png" aria-hidden="true" width="160" alt="Snipes logo" border="0" style="height:auto;" />
+            			</a>
+
+            		</td>
+            		<!-- Logo End -->
+            	</tr>
+
+
+            	<tr>
+            		<td>
+
+            			<!-- Nav -->
+            			<table role="presentation" aria-hidden="true" width="100%" border="0" cellpadding="0" cellspacing="0">
+
+            				<tr>
+            					<td>
+            						<table role="presentation" aria-hidden="true" width="100%" border="0" cellpadding="0" cellspacing="0">
+            							<!-- Clear Spacer : BEGIN -->
+            							<tr>
+            								<td bgcolor="#ffffff" height="1" style="font-size: 0; line-height: 0;">
+            									&nbsp;
+            								</td>
+            							</tr>
+            							<!-- Clear Spacer : END -->
+            						</table>
+            					</td>
+            				</tr>
+
+
+
+            				<tr align="center" width="100%">
+            					<td>
+            						<table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+
+
+            							<!-- Clear Spacer : BEGIN -->
+            							<tr>
+            								<td height="10" style="font-size: 0; line-height: 0;">
+            									&nbsp;
+            								</td>
+            							</tr>
+            							<!-- Clear Spacer : END -->
+
+
+            							<!-- Nav -->
+            							<tr>
+            								<td align="center">
+            									<a href="http://www.snipesusa.com/new-arrivals/" style="font-family:  AvenirNext-DemiBold , Helvetica Neue , Helvetica , Arial ,sans-serif; font-weight: bold; text-decoration: none; color: #000000; font-size: 13px; text-transform: uppercase;">New</a>
+            								</td>
+
+            								<td align="center">
+            									<a href="http://www.snipesusa.com/men/" style="font-family:  AvenirNext-DemiBold , Helvetica Neue , Helvetica , Arial ,sans-serif; font-weight: bold; text-decoration: none; color: #000000; font-size: 13px; text-transform: uppercase;">Men</a>
+            								</td>
+
+            								<td align="center">
+            									<a href="http://www.snipesusa.com/women/" style="font-family:  AvenirNext-DemiBold , Helvetica Neue , Helvetica , Arial ,sans-serif; font-weight: bold; text-decoration: none; color: #000000; font-size: 13px; text-transform: uppercase;">Women</a>
+            								</td>
+
+            								<td align="center">
+            									<a href="http://www.snipesusa.com/kids/" style="font-family:  AvenirNext-DemiBold , Helvetica Neue , Helvetica , Arial ,sans-serif; font-weight: bold; text-decoration: none; color: #000000; font-size: 13px; text-transform: uppercase;">Kids</a>
+            								</td>
+
+            								<td align="center">
+            									<a href="http://www.snipesusa.com/sale/" style="font-family:  AvenirNext-DemiBold , Helvetica Neue , Helvetica , Arial ,sans-serif; font-weight: bold; text-decoration: none; color: #000000; font-size: 13px; text-transform: uppercase;">Sale</a>
+            								</td>
+            							</tr>
+            							<!-- /Nav -->
+
+
+            							<!-- Clear Spacer : BEGIN -->
+            							<tr>
+            								<td height="10" style="font-size: 0; line-height: 0;">
+            									&nbsp;
+            								</td>
+            							</tr>
+            							<!-- Clear Spacer : END -->
+
+
+            						</table>
+            					</td>
+            				</tr>
+
+
+            				<tr>
+            					<td>
+            						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+            							<!-- Clear Spacer : BEGIN -->
+            							<tr>
+            								<td bgcolor="cccccc" height="1" style="font-size: 0; line-height: 0;">
+            									&nbsp;
+            								</td>
+            							</tr>
+            							<!-- Clear Spacer : END -->
+            						</table>
+            					</td>
+            				</tr>
+
+            			</table>
+            			<!-- /Nav -->
+            		</td>
+            	</tr>
+
+
+            	<!-- Clear Spacer : BEGIN -->
+            	<tr>
+            		<td height="20" style="font-size: 0; line-height: 0;">
+            			&nbsp;
+            		</td>
+            	</tr>
+            	<!-- Clear Spacer : END -->
+
+
+            	<tr>
+            		<td bgcolor="#000000" align="center" valign="top" style="padding-top: 10px; padding-bottom: 10px;">
+            			<table width="100%" align="center" border="0" cellpadding="0" cellspacing="0">
+            				<tbody>
+            					<!-- Free Shipping Start -->
+            					<tr width="100%">
+            						<td align="center" class="contentStyle" valign="middle">
+            							<a class="free-shipping-bar" href="https://www.snipesusa.com/" style="color: #FFFFFF; font-weight: bold; text-decoration: none; text-transform: uppercase; font-family: AvenirNext-DemiBold, Helvetica Neue, Helvetica, Arial,sans-serif; font-size: 14px;">Free Shipping on all orders over $125!</a>
+            						</td>
+            					</tr>
+            					<!-- /Free Shipping End -->
+            				</tbody>
+            			</table>
+            		</td>
+            	</tr>
+
+            	<!-- Clear Spacer : BEGIN -->
+            	<tr>
+            		<td height="3" style="font-size: 0; line-height: 0;">
+            			&nbsp;
+            		</td>
+            	</tr>
+            	<!-- Clear Spacer : END -->
+
+            </table>
+            <!-- Email Header : END -->
+
+            <!-- Body : BEGIN -->
+            <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 600px;">
+
+            	<tr>
+            		<!-- Spacer : BEGIN -->
+            		<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+            			<tr>
+            				<td height="20" style="font-size: 0; line-height: 0;">
+            					&nbsp;
+            				</td>
+            			</tr>
+            		</table>
+            		<!-- Spacer : END -->
+
+            		<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="max-width:600px;">
+            			<tr>
+            				<td align="center">
+            					<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+            						<!-- TITLE -->
+            						<tr>
+            							<td align="center" style="padding-left: 10px; padding-right: 10px; margin: 0; font-family: sans-serif; font-size: 20px; display: block; font-weight: bold;text-align:left;">
+            								Section Title
+            							</td>
+            						</tr>
+            						<!-- MESSAGE -->
+            						<tr>
+            							<td align="center">
+            								<p style="text-align:left;padding-left: 10px; padding-right: 10px; font-family: sans-serif; font-size: 15px; display: block;">
+            									Put the message here.
+            								</p>
+            							</td>
+            						</tr>
+            					</table>
+            				</td>
+            			</tr>
+            		</table>
+
+            		<!-- Spacer : BEGIN -->
+            		<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+            			<tr>
+            				<td height="42" style="font-size: 0; line-height: 0;">
+            					&nbsp;
+            				</td>
+            			</tr>
+            		</table>
+            		<!-- Spacer : END -->
+
+            	</tr>
+    
+
+            </table>
+
+            <!-- Body : END -->
+
+            
+
+    	<!-- Email Store END -->
+    	<!-- Email Footer : BEGIN -->
+    	<table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
+    		<!-- Footer Start-->
+    		<tr>
+    			<td align="center" style=" padding-top: 10px; padding-bottom: 10px; background-color: #ffffff;" bgcolor="#ffffff">
+
+    				<tr>
+    					<td align="center" style="padding-left: 10px; padding-right: 10px; margin: 0; font-family: sans-serif; font-size: 20px; display: block; font-weight: bold;">
+
+    						<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+    							<tr>
+    								<td align="center">
+    									<p style="font-family: sans-serif; font-size: 15px;">Follow us on social media <br><br></p>
+    								</td>
+    							</tr>
+    						</table>
+    					</td>
+    				</tr>
+
+    				<!-- Social Start -->
+    				<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+    					<tr>
+    						<td align="center" style="padding-top: 0px; padding-bottom: 10px;">
+    							<table>
+    								<tr>
+    									<td style="padding: 0 10px;">
+    										<a href="https://www.facebook.com/snipesusa" target="_blank"><img src="https://media.sailthru.com/4yy/1k1/3/u/58dd0aafc6dfa.png" alt="facebook" width="23" height="23" style="display: block; border: 0px;" /></a>
+    									</td>
+    									<td style="padding: 0 10px;">
+    										<a href="https://twitter.com/snipes_usa" target="_blank"><img src="https://media.sailthru.com/4yy/1k1/3/u/58dd0acb1711b.png" alt="twitter" width="23" height="23" style="display: block; border: 0px;" /></a>
+    									</td>
+    									<td style="padding: 0 10px;">
+    										<a href="https://www.instagram.com/snipes_usa/" target="_blank"><img src="https://media.sailthru.com/4yy/1k1/3/u/58dd0ac2ae1ba.png" alt="instagram" width="23" height="23" style="display: block; border: 0px;" /></a>
+    									</td>
+    									<td style="padding: 0 10px;">
+    										<a href="https://www.youtube.com/user/snipes" target="_blank"><img src="https://media.sailthru.com/4yy/1k1/3/u/58dd0ab90e726.png" alt="youtube" width="23" height="23" style="display: block; border: 0px;" /></a>
+    									</td>
+
+    								</tr>
+    							</table>
+    						</td>
+    					</tr>
+    				</table>
+    				<!-- Social End -->
+
+    				<!-- Unsubscribe Start -->
+    				<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+    					<tr>
+    						<td align="center" class="footer-content" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px;">
+    							<p style="font-size: 12px; font-weight: 400; line-height: 20px; color: #000000;">
+    								If you believe this has been sent to you in error, please safely <a href="{optout_confirm_url}" style="color: #000000; font-size: 12px;">unsubscribe</a>.
+    							</p>
+    						</td>
+    					</tr>
+    				</table>
+    				<!-- Unsubscribe End -->
+
+    			</td>
+    		</tr>
+    		<!-- Footer End -->
+    	</table>
+    	<!-- Email Footer : END -->
+
+        <!--[if mso]>
+        </td>
+        </tr>
+        </table>
+        <![endif]-->
+    </div>
+    </html>
