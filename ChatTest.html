@@ -35,25 +35,25 @@
 		embedded_svc.settings.entryFeature = 'LiveAgent';
 
 		embedded_svc.init(
-			'https://snipesusa.my.salesforce.com',
-			'https://snipesusa.secure.force.com',
+			'https://snipesusa--partial.my.salesforce.com',
+			'https://partial-snipesusa.cs197.force.com',
 			gslbBaseURL,
-			'00D4S000000EeIu',
+			'00D040000008gSI',
 			'SnipesUSA_Chat',
 			{
-				baseLiveAgentContentURL: 'https://c.la4-c1-ia2.salesforceliveagent.com/content',
+				baseLiveAgentContentURL: 'https://c.la3-c1cs-ia4.salesforceliveagent.com/content',
 				deploymentId: '5724S000000g5UZ',
 				buttonId: '5734S000000g5Ux',
-				baseLiveAgentURL: 'https://d.la4-c1-ia2.salesforceliveagent.com/chat',
+				baseLiveAgentURL: 'https://d.la3-c1cs-ia4.salesforceliveagent.com/chat',
 				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I4S000000g34YUAQ_1776535398d',
-				isOfflineSupportEnabled: false
+				isOfflineSupportEnabled: true
 			}
 		);
 	};
 
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
-		s.setAttribute('src', 'https://snipesusa.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.setAttribute('src', 'https://snipesusa--partial.my.salesforce.com/embeddedservice/5.0/esw.min.js');
 		s.onload = function() {
 			initESW(null);
 		};
@@ -125,3 +125,5 @@
 		
 </body>
     </html>
+
+
